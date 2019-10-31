@@ -1,0 +1,21 @@
+---
+  service_list:
+#    - authentication
+    - nova
+#    - neutron # done
+#    - keystone # done
+#    - cinder # wait netapp
+#    - glance # done
+  use_existing_users: true
+  image_name: "cirros"
+  flavor_name: "cirros"
+  glance_image_location: "images/cirros.img"
+  smoke: true
+  users_amount: 1
+  tenants_amount: 1
+  controllers_amount: 1
+  compute_amount: 1
+  storage_amount: 1
+  network_amount: 1
+  external_network_id: 32b8fa96-5519-497f-b1ab-24111e91cbe6
+  external_network_name: public

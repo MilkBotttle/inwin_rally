@@ -1,0 +1,90 @@
+  GlanceImages.create_and_delete_image:
+    -
+      args:
+        {{ glance_args(location=glance_image_location) }}
+      context:
+        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  GlanceImages.create_and_list_image:
+    -
+      args:
+        {{ glance_args(location=glance_image_location) }}
+      context:
+        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  GlanceImages.list_images:
+    -
+      context:
+        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  GlanceImages.create_and_deactivate_image:
+    -
+      args:
+        {{ glance_args(location=glance_image_location) }}
+      context:
+        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  GlanceImages.create_and_download_image:
+    -
+      args:
+        {{ glance_args(location=glance_image_location) }}
+      context:
+        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  GlanceImages.create_and_get_image:
+    -
+      args:
+        {{ glance_args(location=glance_image_location) }}
+      context:
+        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  GlanceImages.create_and_update_image:
+    -
+      args:
+        {{ glance_args(location=glance_image_location) }}
+      context:
+        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  GlanceImages.create_image_and_boot_instances:
+    -
+      args:
+        number_instances: 2
+        {{ vm_params(image=none,flavor=flavor_name) }}
+        create_image_kwargs:
+          properties:
+            hw_video_model: vga
+        {{ glance_args(location=glance_image_location) }}
+      context:
+        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
