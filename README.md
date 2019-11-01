@@ -21,7 +21,7 @@ openstack subnet create --subnet-range 203.0.113.0/24 --gateway 203.0.113.1 \
 
 Create private network 
 ```
-openstack network create rally_pri
+openstack network create rally_pri --project rally_test
 openstack subnet create --subnet-range 100.1.0.0/25 --network rally_pri
 ```
 3. Download image for test 
