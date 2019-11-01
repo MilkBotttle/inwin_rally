@@ -10,6 +10,7 @@ RUN echo 'source /venv_rally/bin/activate' >> /root/.bashrc
 
 # RUN bash /nvim/nvim_install && \
 #    bash /nvim/nvim_config
+COPY openstack /root/openstack
 ENV PATH="/venv_rally/bin:$PATH"
 RUN pip install git+https://github.com/openstack/rally-openstack.git
 RUN pip install 'urllib3==1.24.2' 'pyasn1<0.5.0,>=0.4.6'
