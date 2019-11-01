@@ -1,223 +1,123 @@
-HeatStacks.create_and_list_stack:
-  -
-    args:
-      template_path: "../templates/default.yaml.template"
-    contexts:
-      {{ user_context(tenants_amount, users_amount, use_existing_users) }}
-    runner:
-      {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
-    sla:
-      {{ no_falures_sla }}
+  HeatStacks.create_and_list_stack:
+    -
+      args:
+        template_path: "templates/default.yaml.template"
+      context:
+        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
 
-HeatStacks.create_and_delete_stack:
-  -
-    args:
-      template_path: "../templates/default.yaml.template"
-    contexts:
-      {{ user_context(tenants_amount, users_amount, use_existing_users) }}
-    runner:
-      {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
-    sla:
-      {{ no_falures_sla }}
+  HeatStacks.create_and_delete_stack:
+    -
+      args:
+        template_path: "templates/default.yaml.template"
+      context:
+        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
 
-HeatStacks.create_check_delete_stack:
-  -
-    args:
-      template_path: "../templates/default.yaml.template"
-    description: Create, check and delete a stack.
-    contexts:
-      users:
-        users_per_tenant: 2
-        tenants: 2
-    contexts:
-      {{ user_context(tenants_amount, users_amount, use_existing_users) }}
-    runner:
-      {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
-    sla:
-      {{ no_falures_sla }}
+  HeatStacks.create_check_delete_stack:
+    -
+      args:
+        template_path: "templates/default.yaml.template"
+      context:
+        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
 
-HeatStacks.create_update_delete_stack:
-  -
-    args:
-      template_path: "../templates/random_strings.yaml.template"
-      updated_template_path: "../templates/updated_random_strings_add.yaml.template"
-    contexts:
-      {{ user_context(tenants_amount, users_amount, use_existing_users) }}
-    runner:
-      {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
-    sla:
-      {{ no_falures_sla }}
+  HeatStacks.create_update_delete_stack:
+    -
+      args:
+        template_path: "templates/random_strings.yaml.template"
+        updated_template_path: "templates/updated_random_strings_add.yaml.template"
+      context:
+        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
 
-HeatStacks.create_update_delete_stack:
-  -
-    args:
-      template_path: "../templates/random_strings.yaml.template"
-      updated_template_path: "../templates/updated_random_strings_delete.yaml.template"
-    contexts:
-      {{ user_context(tenants_amount, users_amount, use_existing_users) }}
-    runner:
-      {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
-    sla:
-      {{ no_falures_sla }}
+  HeatStacks.create_suspend_resume_delete_stack:
+    -
+      args:
+        template_path: "templates/random_strings.yaml.template"
+      context:
+        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
 
-HeatStacks.create_suspend_resume_delete_stack:
-  -
-    args:
-      template_path: "~/.rally/extra/random_strings.yaml.template"
-    contexts:
-      {{ user_context(tenants_amount, users_amount, use_existing_users) }}
-    runner:
-      {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
-    sla:
-      {{ no_falures_sla }}
+  HeatStacks.create_snapshot_restore_delete_stack:
+    -
+      args:
+        template_path: "templates/random_strings.yaml.template"
+      context:
+        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
 
-HeatStacks.create_snapshot_restore_delete_stack:
-  -
-    args:
-      template_path: "~/.rally/extra/random_strings.yaml.template"
-    contexts:
-      {{ user_context(tenants_amount, users_amount, use_existing_users) }}
-    runner:
-      {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
-    sla:
-      {{ no_falures_sla }}
+  HeatStacks.create_stack_and_list_output:
+    -
+      args:
+        template_path: "templates/resource_group_with_outputs.yaml.template"
+      context:
+        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
 
-HeatStacks.create_stack_and_scale:
-  -
-    args:
-        delta: 1
-        template_path: "~/.rally/extra/autoscaling_group.yaml.template"
-        parameters:
-          scaling_adjustment: 1
-        output_key: scaling_url
-    description: Create an autoscaling stack and invoke a scaling policy.
-    contexts:
-      users:
-        users_per_tenant: 1
-        tenants: 2
-    runner:
-      constant:
-        concurrency: 1
-        times: 2
-    hooks: []
-    sla:
-      failure_rate:
-        max: 0
-  - scenario:
-      HeatStacks.create_stack_and_scale:
-        delta: -1
-        template_path: "~/.rally/extra/autoscaling_group.yaml.template"
-        parameters:
-          scaling_adjustment: -1
-        output_key: scaling_url
-    description: Create an autoscaling stack and invoke a scaling policy.
-    contexts:
-      users:
-        users_per_tenant: 1
-        tenants: 2
-    runner:
-      constant:
-        concurrency: 2
-        times: 2
-    hooks: []
-    sla:
-      failure_rate:
-        max: 0
-- title: HeatStacks.create_stack_and_list_output tests
-  description: ''
-  workloads:
-  - scenario:
-      HeatStacks.create_stack_and_list_output:
-        template_path: "~/.rally/extra/resource_group_with_outputs.yaml.template"
-    description: Create stack and list outputs by using new algorithm.
-    contexts:
-      users:
-        users_per_tenant: 2
-        tenants: 2
-    runner:
-      constant:
-        concurrency: 2
-        times: 4
-    hooks: []
-    sla:
-      failure_rate:
-        max: 0
-- title: HeatStacks.create_stack_and_list_output_via_API tests
-  description: ''
-  workloads:
-  - scenario:
-      HeatStacks.create_stack_and_list_output_via_API:
-        template_path: "~/.rally/extra/resource_group_with_outputs.yaml.template"
-    description: Create stack and list outputs by using old algorithm.
-    contexts:
-      users:
-        users_per_tenant: 2
-        tenants: 2
-    runner:
-      constant:
-        concurrency: 2
-        times: 4
-    hooks: []
-    sla:
-      failure_rate:
-        max: 0
-- title: HeatStacks.create_stack_and_show_output tests
-  description: ''
-  workloads:
-  - scenario:
-      HeatStacks.create_stack_and_show_output:
-        template_path: "~/.rally/extra/resource_group_with_outputs.yaml.template"
+  HeatStacks.create_stack_and_list_output_via_API:
+    -
+      args:
+        template_path: "templates/resource_group_with_outputs.yaml.template"
+      context:
+        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  HeatStacks.create_stack_and_show_output:
+    -
+      args:
+        template_path: "templates/resource_group_with_outputs.yaml.template"
         output_key: val1
-    description: Create stack and show output by using new algorithm.
-    contexts:
-      users:
-        users_per_tenant: 2
-        tenants: 2
-    runner:
-      constant:
-        concurrency: 2
-        times: 4
-    hooks: []
-    sla:
-      failure_rate:
-        max: 0
-- title: HeatStacks.create_stack_and_show_output_via_API tests
-  description: ''
-  workloads:
-  - scenario:
-      HeatStacks.create_stack_and_show_output_via_API:
-        template_path: "~/.rally/extra/resource_group_with_outputs.yaml.template"
+      context:
+        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  HeatStacks.create_stack_and_show_output_via_API:
+    -
+      args:
+        template_path: "templates/resource_group_with_outputs.yaml.template"
         output_key: val1
-    description: Create stack and show output by using old algorithm.
-    contexts:
-      users:
-        users_per_tenant: 2
-        tenants: 2
-    runner:
-      constant:
-        concurrency: 2
-        times: 4
-    hooks: []
-    sla:
-      failure_rate:
-        max: 0
-- title: Authenticate.validate_heat tests
-  description: ''
-  workloads:
-  - scenario:
-      Authenticate.validate_heat:
+      context:
+        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  Authenticate.validate_heat:
+    -
+      args:
         repetitions: 2
-    description: Check Heat Client to ensure validation of token.
-    contexts:
-      users:
-        users_per_tenant: 5
-        tenants: 3
-    runner:
-      constant:
-        concurrency: 5
-        times: 10
-    hooks: []
-    sla:
-      failure_rate:
-        max: 0
-
+      context:
+        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}

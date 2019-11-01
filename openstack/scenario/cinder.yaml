@@ -1,3 +1,14 @@
+  Authenticate.validate_cinder:
+    -
+      args:
+        repetitions: 2
+      context:
+        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
   CinderVolumes.create_and_attach_volume:
     -
       args:
@@ -7,6 +18,7 @@
         quotas:
           {{ unlimited_volumes() }}
         {% endcall %}
+        network: {}
       runner:
         {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
       sla:
@@ -172,6 +184,7 @@
         quotas:
           {{ unlimited_volumes() }}
         {% endcall %}
+        network: {}
       runner:
         {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(10, 3*controllers_amount), is_smoke=smoke) }}
       sla:

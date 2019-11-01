@@ -94,10 +94,3 @@
         disk_format: {{ type }}
         image_location: {{ location }}
 {%- endmacro %}
-
-{%- macro network_args()%}
-        router:
-          external: True
-          external_gateway_info:
-            network_id: {{ external_network_id }}
-{%- endmacro %}

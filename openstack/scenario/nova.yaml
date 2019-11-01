@@ -1,3 +1,14 @@
+  Authenticate.validate_nova:
+    -
+      args:
+        repetitions: 2
+      context:
+        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=67*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
   NovaKeypair.boot_and_delete_server_with_keypair:
     -
       args:
@@ -7,6 +18,8 @@
         network:
           networks_per_tenant: 1
           start_cidr: "100.1.0.0/25"
+          router:
+            external: False
         quotas:
           {{ unlimited_neutron() }}
           {{ unlimited_nova(keypairs=true) }}
@@ -58,6 +71,8 @@
         network:
           networks_per_tenant: 1
           start_cidr: "100.1.0.0/25"
+          router:
+            external: False
         quotas:
           {{ unlimited_neutron() }}
           {{ unlimited_nova() }}
@@ -76,6 +91,8 @@
         network:
           networks_per_tenant: 1
           start_cidr: "100.1.0.0/25"
+          router:
+            external: False
         quotas:
           {{ unlimited_neutron() }}
           {{ unlimited_nova() }}
@@ -95,6 +112,8 @@
         network:
           networks_per_tenant: 1
           start_cidr: "100.1.0.0/25"
+          router:
+            external: False
         quotas:
           {{ unlimited_neutron() }}
           {{ unlimited_nova() }}
@@ -117,6 +136,8 @@
         network:
           networks_per_tenant: 1
           start_cidr: "100.1.0.0/25"
+          router:
+            external: False
         quotas:
           {{ unlimited_neutron() }}
           {{ unlimited_nova() }}
@@ -136,6 +157,8 @@
         network:
           networks_per_tenant: 1
           start_cidr: "100.1.0.0/25"
+          router:
+            external: False
         quotas:
           {{ unlimited_volumes() }}
           {{ unlimited_neutron() }}
@@ -156,6 +179,8 @@
         network:
           networks_per_tenant: 1
           start_cidr: "100.1.0.0/25"
+          router:
+            external: False
         quotas:
           {{ unlimited_neutron() }}
           {{ unlimited_nova() }}
@@ -174,6 +199,8 @@
         network:
           networks_per_tenant: 1
           start_cidr: "100.1.0.0/25"
+          router:
+            external: False
         quotas:
           {{ unlimited_neutron() }}
           {{ unlimited_nova() }}
@@ -207,20 +234,9 @@
             external: True
             external_gateway_info:
               network_id: {{ external_network_id }}
-        {% endcall %}
-      runner:
-        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=17*controllers_amount, is_smoke=smoke) }}
-      sla:
-        {{ no_failures_sla() }}
-
-  NovaServers.boot_and_delete_multiple_servers:
-    -
-      args:
-        count: 5
-        {{ vm_params(image_name, flavor_name) }}
-      context:
-        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
-        network: {}
+        quotas:
+          {{ unlimited_neutron() }}
+          {{ unlimited_nova() }}
         {% endcall %}
       runner:
         {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=17*controllers_amount, is_smoke=smoke) }}
@@ -232,7 +248,16 @@
       args:
         {{ vm_params(image_name, flavor_name) }}
       context:
-        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        network:
+          networks_per_tenant: 1
+          start_cidr: "100.1.0.0/25"
+          router:
+            external: False
+        quotas:
+          {{ unlimited_neutron() }}
+          {{ unlimited_nova() }}
+        {% endcall %}
       runner:
         {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=17*controllers_amount, is_smoke=smoke) }}
       sla:
@@ -243,7 +268,16 @@
       args:
         {{ vm_params(image_name, flavor_name) }}
       context:
-        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        network:
+          networks_per_tenant: 1
+          start_cidr: "100.1.0.0/25"
+          router:
+            external: False
+        quotas:
+          {{ unlimited_neutron() }}
+          {{ unlimited_nova() }}
+        {% endcall %}
       runner:
         {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=17*controllers_amount, is_smoke=smoke) }}
       sla:
@@ -254,7 +288,16 @@
       args:
         {{ vm_params(image_name, flavor_name) }}
       context:
-        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        network:
+          networks_per_tenant: 1
+          start_cidr: "100.1.0.0/25"
+          router:
+            external: False
+        quotas:
+          {{ unlimited_neutron() }}
+          {{ unlimited_nova() }}
+        {% endcall %}
       runner:
         {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=17*controllers_amount, is_smoke=smoke) }}
       sla:
@@ -265,19 +308,16 @@
       args:
         {{ vm_params(image_name, flavor_name) }}
       context:
-        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
-      runner:
-        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=17*controllers_amount, is_smoke=smoke) }}
-      sla:
-        {{ no_failures_sla() }}
-
-  NovaServers.resize_server:
-    -
-      args:
-        to_flavor: {{ to_flavor_name }}
-        {{ vm_params(image_name, flavor_name) }}
-      context:
-        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        network:
+          networks_per_tenant: 1
+          start_cidr: "100.1.0.0/25"
+          router:
+            external: False
+        quotas:
+          {{ unlimited_neutron() }}
+          {{ unlimited_nova() }}
+        {% endcall %}
       runner:
         {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=17*controllers_amount, is_smoke=smoke) }}
       sla:
