@@ -2,6 +2,7 @@
 OpenStack Certification Task
 ============================
 
+
 How To Validate & Run Task
 --------------------------
 
@@ -37,7 +38,9 @@ File task_arguments.yaml contains all task options:
 +------------------------+----------------------------------------------------+
 | flavor_name            | Flavor name that exist in cloud                    |
 +------------------------+----------------------------------------------------+
-| glance_image_location  | URL of image that is used to test Glance upload    |
+| to_flavor_name         | Flavor bigger than flavor_name exist in cloud      |
++------------------------+----------------------------------------------------+
+| glance_image_location  | Path of image that is used to test Glance upload   |
 +------------------------+----------------------------------------------------+
 | users_amount           | Expected amount of users                           |
 +------------------------+----------------------------------------------------+
@@ -45,6 +48,9 @@ File task_arguments.yaml contains all task options:
 +------------------------+----------------------------------------------------+
 | controllers_amount     | Amount of OpenStack API nodes (controllers)        |
 +------------------------+----------------------------------------------------+
-
-All options have default values, hoverer user should change them to reflect
-configuration and size of tested OpenStack cloud.
+| external_network_id    | External network id for test                       |
++------------------------+----------------------------------------------------+
+| external_network_name  | External network name for test                     |
++------------------------+----------------------------------------------------+
+| private_network_id     | Private network id for test                        |
++------------------------+----------------------------------------------------+
