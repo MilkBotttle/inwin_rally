@@ -193,3 +193,261 @@
         {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=17*controllers_amount, is_smoke=smoke) }}
       sla:
         {{ no_failures_sla() }}
+
+  NovaServers.boot_and_associate_floating_ip:
+    -
+      args:
+        create_floating_ip_args:
+          ext_network: {{ external_network_name }}
+        {{ vm_params(image_name, flavor_name) }}
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        network:
+          router:
+            external: True
+            external_gateway_info:
+              network_id: {{ external_network_id }}
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=17*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  NovaServers.boot_and_delete_multiple_servers:
+    -
+      args:
+        count: 5
+        {{ vm_params(image_name, flavor_name) }}
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        network: {}
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=17*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  NovaServers.boot_and_get_console_output:
+    -
+      args:
+        {{ vm_params(image_name, flavor_name) }}
+      context:
+        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=17*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  NovaServers.boot_and_show_server:
+    -
+      args:
+        {{ vm_params(image_name, flavor_name) }}
+      context:
+        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=17*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  NovaServers.boot_and_update_server:
+    -
+      args:
+        {{ vm_params(image_name, flavor_name) }}
+      context:
+        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=17*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  NovaServers.boot_lock_unlock_and_delete:
+    -
+      args:
+        {{ vm_params(image_name, flavor_name) }}
+      context:
+        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=17*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  NovaServers.resize_server:
+    -
+      args:
+        to_flavor: {{ to_flavor_name }}
+        {{ vm_params(image_name, flavor_name) }}
+      context:
+        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=17*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  NovaServices.list_services:
+    -
+      context:
+        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=17*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  NovaHypervisors.list_and_get_hypervisors:
+    -
+      context:
+        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=17*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  NovaFlavors.create_and_delete_flavor:
+    -
+      args:
+        disk: 10
+        vcpus: 2
+        ram: 1024
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        roles:
+          - "admin"
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=17*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  NovaFlavors.create_and_get_flavor:
+    -
+      args:
+        disk: 10
+        vcpus: 2
+        ram: 1024
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        roles:
+          - "admin"
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=17*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  NovaFlavors.create_and_list_flavor_access:
+    -
+      args:
+        disk: 10
+        vcpus: 2
+        ram: 1024
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        roles:
+          - "admin"
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=17*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  NovaFlavors.create_flavor_and_add_tenant_access:
+    -
+      args:
+        disk: 10
+        vcpus: 2
+        ram: 1024
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        roles:
+          - "admin"
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=17*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  NovaFlavors.list_flavors:
+    -
+      context:
+        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=17*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  NovaAvailabilityZones.list_availability_zones:
+    -
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        roles:
+          - "admin"
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=17*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  NovaAggregates.list_aggregates:
+    -
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        roles:
+          - "admin"
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=17*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  NovaAggregates.create_and_update_aggregate:
+    -
+      args:
+        availability_zone: nova
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        roles:
+          - "admin"
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=17*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  NovaAggregates.create_and_delete_aggregate:
+    -
+      args:
+        availability_zone: nova
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        roles:
+          - "admin"
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=17*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  NovaAggregates.create_and_list_aggregates:
+    -
+      args:
+        availability_zone: nova
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        roles:
+          - "admin"
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=17*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  NovaAgents.list_agents:
+    -
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        roles:
+          - "admin"
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=17*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
