@@ -31,7 +31,7 @@ openstack image create --file cirros.img --container-format bare --disk-format q
 > Use rally user
 Create private network 
 ```
-openstack network create rally_pri
+openstack network create rally_pri --project rally_test
 openstack subnet create --subnet-range 100.1.0.0/25 --network rally_pri
 ```
 Create zone for designate
