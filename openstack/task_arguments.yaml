@@ -6,12 +6,13 @@
     - cinder
     - glance
     - heat
+    - designate
   use_existing_users: true
   image_name: "cirros"
   flavor_name: "cirros"
   to_flavor_name: "rally"
   glance_image_location: "images/cirros.img"
-  smoke: false
+  smoke: true
   users_amount: 1
   tenants_amount: 1
   controllers_amount: 3
@@ -19,3 +20,4 @@
   external_network_id: 32b8fa96-5519-497f-b1ab-24111e91cbe6
   external_network_name: public
   private_network_id: 5618a3e9-87a1-4f44-81af-245ee00813de
+  zone_id: 1760cc4b-e6d7-4331-9e56-bbfd3e54a637

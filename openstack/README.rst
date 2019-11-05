@@ -40,7 +40,7 @@ File task_arguments.yaml contains all task options:
 +------------------------+----------------------------------------------------+
 | to_flavor_name         | Flavor bigger than flavor_name exist in cloud      |
 +------------------------+----------------------------------------------------+
-| glance_image_location  | Path of image that is used to test Glance upload   |
+| glance_image_location  | Path of image that is used to test Glance          |
 +------------------------+----------------------------------------------------+
 | users_amount           | Expected amount of users                           |
 +------------------------+----------------------------------------------------+
@@ -53,4 +53,6 @@ File task_arguments.yaml contains all task options:
 | external_network_name  | External network name for test                     |
 +------------------------+----------------------------------------------------+
 | private_network_id     | Private network id for test                        |
++------------------------+----------------------------------------------------+
+| zone_id                | A exist DNSaaS zone id                             |
 +------------------------+----------------------------------------------------+

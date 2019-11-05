@@ -141,6 +141,8 @@
   CinderVolumes.create_and_upload_volume_to_image:
     -
       args:
+        image:
+          name: {{ image_name }}
         container_format: "bare"
         disk_format: "raw"
         do_delete: true

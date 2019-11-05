@@ -41,3 +41,11 @@
 {% if "heat" in service_list %}
 {%- include "scenario/heat.yaml"-%}
 {% endif %}
+
+{% if "octavia" in service_list %}
+{%- include "scenario/octavia.yaml"-%}
+{% endif %}
+
+{% if "designate" in service_list %}
+{%- include "scenario/designate.yaml"-%}
+{% endif %}

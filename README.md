@@ -8,9 +8,9 @@ openstack user create rally_test --password rally --project rally_test
 openstack role add --user rally_test --project rally_test admin
 ```
 
-2. Create external network and private network and record their id
+2. Create resource for rally test
+> Use admin user 
 Create external network
-> If use existing external skip this
 ```
 openstack network create --share --provider-physical-network physnet1 \
   --provider-network-type flat --external rally_ext
@@ -18,15 +18,26 @@ openstack subnet create --subnet-range 203.0.113.0/24 --gateway 203.0.113.1 \
   --network rally_ext --allocation-pool start=203.0.113.11,end=203.0.113.250 \
   --no-dhcp --dns-nameserver 8.8.4.4 raly_ext_v4
 ```
-
+Create flavor
+```
+openstack flavor create --vcpus 1 --ram 64 --disk 1 cirros
+openstack flavor create --vapus 2 --ram 128 --disk 5 big_cirros
+```
+Download image and upload for test 
+[cirros image download](http://download.cirros-cloud.net/0.4.0/cirros-0.4.0-x86_64-disk.img)
+```
+openstack image create --file cirros.img --container-format bare --disk-format qcow2 cirros
+```
+> Use rally user
 Create private network 
 ```
 openstack network create rally_pri
 openstack subnet create --subnet-range 100.1.0.0/25 --network rally_pri
 ```
-3. Download image for test 
-[cirros download](http://download.cirros-cloud.net/0.4.0/cirros-0.4.0-x86_64-disk.img)
-
+Create zone for designate
+```
+openstack zone create rally.rally.
+```
 4. Create a rally environment file `env.yaml`
 ```
 ---
@@ -39,10 +50,9 @@ openstack:
     password: openstack
     tenant_name: admin
   users:
-    - username: cameron
-      password: cameron
-      tenant_name: cameron
-
+    - username: rally_test
+      password: rally
+      tenant_name: rally_test
 ```
 5. Create env
 ```
