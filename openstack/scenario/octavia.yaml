@@ -1,0 +1,260 @@
+  Octavia.healthmonitors_list:
+    -
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        network: {}
+        roles: ["admin"]
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=67*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  Octavia.create_and_delete_healthmonitors:
+    -
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        network: {}
+        roles: ["admin"]
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=67*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  Octavia.create_and_update_healthmonitors:
+    -
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        network: {}
+        roles: ["admin"]
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=67*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  Authenticate.validate_octavia:
+    -
+      args:
+        repetitions: 2
+      context:
+        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=67*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  Octavia.create_member_and_update:
+    -
+      args:
+        image:
+          name: {{ image_name }}
+        flavor:
+          name: {{ flavor_name }}
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        network: {}
+        roles: ["admin"]
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=67*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  Octavia.create_member_and_delete:
+    -
+      args:
+        image:
+          name: {{ image_name }}
+        flavor:
+          name: {{ flavor_name }}
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        network: {}
+        roles: ["admin"]
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=67*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  Octavia.list_members:
+    -
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        network: {}
+        roles: ["admin"]
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=67*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  Octavia.create_and_delete_pools:
+    -
+      args:
+        lb_algorithm: "ROUND_ROBIN"
+        protocol: "HTTP"
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        network: {}
+        roles: ["admin"]
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=67*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  Octavia.create_and_list_pools:
+    -
+      args:
+        lb_algorithm: "ROUND_ROBIN"
+        protocol: "HTTP"
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        network: {}
+        roles: ["admin"]
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=67*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  Octavia.create_and_show_pools:
+    -
+      args:
+        lb_algorithm: "ROUND_ROBIN"
+        protocol: "HTTP"
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        network: {}
+        roles: ["admin"]
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=67*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  Octavia.create_and_update_pools:
+    -
+      args:
+        lb_algorithm: "ROUND_ROBIN"
+        protocol: "HTTP"
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        network: {}
+        roles: ["admin"]
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=67*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  Octavia.create_and_list_listeners:
+    -
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        network: {}
+        roles: ["admin"]
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=67*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  Octavia.create_and_delete_listeners:
+    -
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        network: {}
+        roles: ["admin"]
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=67*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  Octavia.create_and_update_listeners:
+    -
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        network: {}
+        roles: ["admin"]
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=67*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  Octavia.list_listeners:
+    -
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        network: {}
+        roles: ["admin"]
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=67*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  Octavia.create_and_delete_loadbalancers:
+    -
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        network: {}
+        roles: ["admin"]
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=67*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  Octavia.create_and_list_loadbalancers:
+    -
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        network: {}
+        roles: ["admin"]
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=67*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  Octavia.create_and_show_loadbalancers:
+    -
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        network: {}
+        roles: ["admin"]
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=67*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  Octavia.create_and_stats_loadbalancers:
+    -
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        network: {}
+        roles: ["admin"]
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=67*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}
+
+  Octavia.create_and_update_loadbalancers:
+    -
+      context:
+        {% call user_context(tenants_amount, users_amount, use_existing_users) %}
+        network: {}
+        roles: ["admin"]
+        {% endcall %}
+      runner:
+        {{ constant_runner(concurrency=min(50, 2*controllers_amount), times=2*controllers_amount, is_smoke=smoke) }}
+      sla:
+        {{ no_failures_sla() }}

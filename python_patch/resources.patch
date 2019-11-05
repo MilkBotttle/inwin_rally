@@ -1,0 +1,26 @@
+--- ori.py	2019-10-29 10:20:58.000000000 +0800
++++ resources.py	2019-11-05 19:09:25.630041447 +0800
+@@ -366,15 +366,22 @@
+         list_method = getattr(self._client, "%s_list" % self._resource)
+         return list_method()[self._plural_key.replace("_", "")]
+ 
+-
+ @base.resource("octavia", "load_balancer", order=next(_neutron_order),
+                tenant_resource=True)
+ class OctaviaLoadBalancers(OctaviaMixIn):
++    def _wait_lb(self):
++        import time
++        show_method = getattr(self._client, "load_balancer_show")
++        while True:
++            if show_method(self.id())['provisioning_status'] == "ACTIVE":
++                return "ACTIVE"
++            time.sleep(1)
+     def delete(self):
+         from octaviaclient.api.v2 import octavia as octavia_exc
+ 
+         delete_method = getattr(self._client, "load_balancer_delete")
+         try:
++            self._wait_lb()
+             return delete_method(self.id(), cascade=True)
+         except octavia_exc.OctaviaClientException as e:
+             if e.code == 409 and "Invalid state PENDING_DELETE" in e.message:
