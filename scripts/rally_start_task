@@ -1,0 +1,2 @@
+rally task start --task openstack/task.yaml --task-args-file openstack/task_arguments.yaml
+

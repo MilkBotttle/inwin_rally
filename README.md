@@ -58,11 +58,31 @@ openstack:
 ```
 rally env create --spec env.yaml --name openstack
 ```
-
 6. Check env
 ```
 rally env check 
 ```
+
+## Run rally container 
+1. Build image or load from tarball
+```
+docker build --network host -t inwin_rally .
+```
+or
+```
+docker load < inwin_rally.tar
+```
+2. Run 
+```
+docker run --network host --name rally -v rally_db:/venv_rally/database -v rally_volume:/root/.rally -d inwin_rally
+```
+
+## Update rally 
+* Update new tasks
+```
+docker cp openstack rally:/root
+```
+
 ## Run task
 Edit task args and run.
 Read [doc](openstack/README.rst)
