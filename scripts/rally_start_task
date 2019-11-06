@@ -21,7 +21,7 @@ then
     services="nova neutron keystone cinder glance heat designate octavia"
 fi
 TIMESTAMP=$(date +_%F-%H-%M-%S)
-mkdir output/$TIMESTAMP
+mkdir -p output/$TIMESTAMP
 for s in $services
 do
     JSON_STRING=$( jq -n \

@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 RUN sed -i s/^deb-src.*// /etc/apt/sources.list
-RUN apt-get update && apt-get install --yes iputils-ping jq silversearcher-ag wget python python-pip vim git-core && \
+RUN apt-get update && apt-get install --yes iputils-ping tree jq silversearcher-ag wget python python-pip vim git-core && \
     pip install --upgrade pip
 
 RUN wget -O /install_rally.sh https://raw.githubusercontent.com/openstack/rally/master/install_rally.sh
@@ -18,9 +18,9 @@ COPY scripts/* /root/
 RUN patch /venv_rally/lib/python2.7/site-packages/rally_openstack/cleanup/resources.py /root/python_patch/resources.patch
 RUN mkdir -p /root/.rally && rally db recreate && ln -s /root/openstack/plugins /root/.rally/plugins
 
-#COPY nvim /nvim
-#
-#RUN bash /nvim/nvim_install && \
-#   bash /nvim/nvim_config
+COPY nvim /nvim
+
+RUN bash /nvim/nvim_install && \
+   bash /nvim/nvim_config
 
 ENTRYPOINT ["/bin/sleep","infinity"]
