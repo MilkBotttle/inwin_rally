@@ -84,5 +84,9 @@ docker cp openstack rally:/root
 ```
 
 ## Run task
-Edit task args and run.
+1. Edit task args
 Read [doc](openstack/README.rst)
+2. Run task in container 
+```
+rally_start_task all
+```
