@@ -18,9 +18,9 @@ COPY scripts/* /root/
 RUN patch /venv_rally/lib/python2.7/site-packages/rally_openstack/cleanup/resources.py /root/python_patch/resources.patch
 RUN mkdir -p /root/.rally && rally db recreate && ln -s /root/openstack/plugins /root/.rally/plugins
 
-COPY nvim /nvim
+# COPY nvim /nvim
 
-RUN bash /nvim/nvim_install && \
-    bash /nvim/nvim_config
+# RUN bash /nvim/nvim_install && \
+#    bash /nvim/nvim_config
 
 ENTRYPOINT ["/bin/sleep","infinity"]
