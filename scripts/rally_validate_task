@@ -1,1 +1,0 @@
-rally task validate --task openstack/task.yaml --task-args-file openstack/task_arguments.yaml

@@ -1,2 +1,30 @@
-rally task start --task openstack/task.yaml --task-args-file openstack/task_arguments.yaml
+#!/bin/bash
+trap ctrl_c INT
 
+function ctrl_c() {
+        echo "Get Ctrl-c exit."
+        exit 1
+}
+
+if [ "x$@" == "x" ];
+then 
+    echo "Select a service form nova,glance,neutron,keystone,cinder,heat,designate,octavia."
+    echo "or all"
+    exit 0
+
+else
+    services="$@"
+fi 
+
+if [ "$@" == "all" ];
+then
+    services="nova neutron keystone cinder glance heat designate octavia"
+fi
+    
+for s in $services
+do
+    JSON_STRING=$( jq -n \
+                      --arg service "$s" \
+                      '{service_list: [ $service ]}' )
+    rally task start --task /root/openstack/task.yaml --task-args-file /root/openstack/task_arguments.yaml --task-args "$JSON_STRING" --tag "$s$(date +_%F-%T)"
+done

@@ -28,8 +28,6 @@ File task_arguments.yaml contains all task options:
 +------------------------+----------------------------------------------------+
 | Name                   | Description                                        |
 +========================+====================================================+
-| service_list           | List of services which should be tested            |
-+------------------------+----------------------------------------------------+
 | smoke                  | Dry run without load from 1 user                   |
 +------------------------+----------------------------------------------------+
 | use_existing_users     | In case of testing cloud with r/o Keystone e.g. AD |
