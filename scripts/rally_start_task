@@ -20,7 +20,8 @@ if [ "$@" == "all" ];
 then
     services="nova neutron keystone cinder glance heat designate octavia"
 fi
-TIMESTAMP=$(date +_%F-%H-%M-%S)
+TIMESTAMP=$(date +%F-%H-%M-%S)
+ECHO_STRING=
 mkdir -p output/$TIMESTAMP
 for s in $services
 do
@@ -29,5 +30,9 @@ do
                       '{service_list: [ $service ]}' )
     rally task start --task /root/openstack/task.yaml --task-args-file /root/openstack/task_arguments.yaml --task-args "$JSON_STRING" --tag "$s$TIMESTAMP"
     
-    rally task report --html-static --uuid $(rally task list --uuids-only --tag "$s$TIMESTAMP") --out output/$TIMESTAMP/$s$TIMESTAMP.html
+    rally task report --html-static --uuid $(rally task list --uuids-only --tag "$s-$TIMESTAMP") --out output/$TIMESTAMP/$s.html
+    ECHO_STRING="$ECHO_STRING \n$s report path: output/$TIMESTAMP/$s.html"
 done
+
+echo
+echo -e "$ECHO_STRING"

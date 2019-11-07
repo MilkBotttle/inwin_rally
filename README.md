@@ -74,7 +74,8 @@ docker load < inwin_rally.tar
 ```
 2. Run 
 ```
-docker run --network host --name rally -v rally_db:/venv_rally/database -v rally_volume:/root/.rally -d inwin_rally
+mkdir output
+docker run --network host --name rally -v $PWD/output:/root/output -v rally_db:/venv_rally/database -v rally_volume:/root/.rally -d inwin_rally
 ```
 
 ## Update rally 

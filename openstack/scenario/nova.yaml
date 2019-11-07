@@ -213,7 +213,7 @@
   Quotas.nova_update_and_delete:
     -
       args:
-        max_quota: 1024
+        max_quota: 4096
       context:
         {{ user_context(tenants_amount, users_amount, use_existing_users) }}
       runner:
