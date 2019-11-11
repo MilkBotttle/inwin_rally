@@ -1,20 +1,39 @@
---- ori.py	2019-10-29 10:20:58.000000000 +0800
-+++ resources.py	2019-11-05 19:09:25.630041447 +0800
-@@ -366,15 +366,22 @@
-         list_method = getattr(self._client, "%s_list" % self._resource)
-         return list_method()[self._plural_key.replace("_", "")]
+--- cleanup/resources.py	2019-10-18 14:19:43.951905100 +0800
++++ /tmp/resources.py	2019-11-08 15:28:36.270715200 +0800
+@@ -13,8 +13,10 @@
+ #    License for the specific language governing permissions and limitations
+ #    under the License.
  
--
++import time
+ from rally.common import cfg
+ from rally.common import logging
++from rally import exceptions
+ from rally.task import utils as task_utils
+ 
+ from rally_openstack.cleanup import base
+@@ -370,11 +372,31 @@
  @base.resource("octavia", "load_balancer", order=next(_neutron_order),
                 tenant_resource=True)
  class OctaviaLoadBalancers(OctaviaMixIn):
 +    def _wait_lb(self):
-+        import time
 +        show_method = getattr(self._client, "load_balancer_show")
++        return_status = ["ACTIVE","ERROR"]
++        timeout = 60
++        start = time.time()
 +        while True:
-+            if show_method(self.id())['provisioning_status'] == "ACTIVE":
-+                return "ACTIVE"
++            status = show_method(self.id())['provisioning_status']
++            if  status in return_status:
++                return
++            if time.time() - start > timeout:
++                raise exceptions.TimeoutException(
++                    desired_status="ACTIVE",
++                    resource_name="loadbalancer",
++                    resource_type="Octavia",
++                    resource_id=self.id,
++                    resource_status=status,
++                    timeout=timeout)
 +            time.sleep(1)
++
      def delete(self):
          from octaviaclient.api.v2 import octavia as octavia_exc
  

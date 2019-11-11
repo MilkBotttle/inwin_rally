@@ -5,7 +5,7 @@
       context:
         {{ user_context(tenants_amount, users_amount, use_existing_users) }}
       runner:
-        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
+        {{ constant_runner(concurrency=min(10, 2*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
       sla:
         {{ no_failures_sla() }}
 
@@ -20,7 +20,7 @@
         {% endcall %}
         network: {}
       runner:
-        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
+        {{ constant_runner(concurrency=min(10, 2*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
       sla:
         {{ no_failures_sla() }}
 
@@ -35,7 +35,7 @@
         {{ volumes() }}
         {% endcall %}
       runner:
-        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+        {{ constant_runner(concurrency=min(10, 2*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
       sla:
         {{ no_failures_sla() }}
 
@@ -51,7 +51,7 @@
           {{ unlimited_volumes() }}
         {% endcall %}
       runner:
-        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(100, 33*controllers_amount), is_smoke=smoke) }}
+        {{ constant_runner(concurrency=min(10, 2*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
       sla:
         {{ no_failures_sla() }}
     -
@@ -63,7 +63,7 @@
           {{ unlimited_volumes() }}
         {% endcall %}
       runner:
-        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(100, 33*controllers_amount), is_smoke=smoke) }}
+        {{ constant_runner(concurrency=min(10, 2*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
       sla:
         {{ no_failures_sla() }}
     -
@@ -75,7 +75,7 @@
           {{ unlimited_volumes() }}
         {% endcall %}
       runner:
-        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(100, 33*controllers_amount), is_smoke=smoke) }}
+        {{ constant_runner(concurrency=min(10, 2*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
       sla:
         {{ no_failures_sla() }}
 
@@ -90,7 +90,7 @@
           {{ unlimited_volumes() }}
         {% endcall %}
       runner:
-        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(100, 33*controllers_amount), is_smoke=smoke) }}
+        {{ constant_runner(concurrency=min(10, 2*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
       sla:
         {{ no_failures_sla() }}
 
@@ -106,7 +106,7 @@
         {{ volumes() }}
         {% endcall %}
       runner:
-        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(100, 33*controllers_amount), is_smoke=smoke) }}
+        {{ constant_runner(concurrency=min(10, 2*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
       sla:
         {{ no_failures_sla() }}
 
@@ -121,7 +121,7 @@
           {{ unlimited_volumes() }}
         {% endcall %}
       runner:
-        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(100, 33*controllers_amount), is_smoke=smoke) }}
+        {{ constant_runner(concurrency=min(10, 2*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
       sla:
         {{ no_failures_sla() }}
     -
@@ -134,7 +134,7 @@
           {{ unlimited_volumes() }}
         {% endcall %}
       runner:
-        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(100, 33*controllers_amount), is_smoke=smoke) }}
+        {{ constant_runner(concurrency=min(10, 2*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
       sla:
         {{ no_failures_sla() }}
 
@@ -154,7 +154,7 @@
           {{ unlimited_volumes() }}
         {% endcall %}
       runner:
-        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(40, 13*controllers_amount), is_smoke=smoke) }}
+        {{ constant_runner(concurrency=min(10, 2*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
       sla:
         {{ no_failures_sla() }}
 
@@ -169,7 +169,7 @@
         {{ volumes() }}
         {% endcall %}
       runner:
-        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+        {{ constant_runner(concurrency=min(10, 2*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
       sla:
         {{ no_failures_sla() }}
 
@@ -188,17 +188,6 @@
         {% endcall %}
         network: {}
       runner:
-        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(10, 3*controllers_amount), is_smoke=smoke) }}
-      sla:
-        {{ no_failures_sla() }}
-
-  Quotas.cinder_update_and_delete:
-    -
-      args:
-        max_quota: 1024
-      context:
-        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
-      runner:
-        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+        {{ constant_runner(concurrency=min(10, 2*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
       sla:
         {{ no_failures_sla() }}

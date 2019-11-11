@@ -3,7 +3,7 @@
       context:
         {{ user_context(tenants_amount, users_amount, use_existing_users) }}
       runner:
-        {{ rps_runner(rps=15*controllers_amount, times=20000*controllers_amount, is_smoke=smoke) }}
+        {{ rps_runner(rps=15*controllers_amount, times=3000*controllers_amount, is_smoke=smoke) }}
       sla:
         {{ no_failures_sla() }}
 
@@ -12,7 +12,7 @@
       context:
         {{ user_context(tenants_amount, users_amount, use_existing_users) }}
       runner:
-        {{ constant_runner(concurrency=min(50, 7*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+        {{ constant_runner(concurrency=min(10, 2*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
       sla:
         {{ no_failures_sla() }}
 
@@ -21,7 +21,7 @@
       context:
         {{ user_context(tenants_amount, users_amount, use_existing_users) }}
       runner:
-        {{ constant_runner(concurrency=min(50, 7*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+        {{ constant_runner(concurrency=min(10, 2*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
       sla:
         {{ no_failures_sla() }}
 
@@ -30,7 +30,7 @@
       context:
         {{ user_context(tenants_amount, users_amount, use_existing_users) }}
       runner:
-        {{ constant_runner(concurrency=min(50, 2*controllers_amount),times=min(200, 10*controllers_amount), is_smoke=smoke) }}
+        {{ constant_runner(concurrency=min(10, 2*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
       sla:
         {{ no_failures_sla() }}
 
@@ -39,7 +39,7 @@
       context:
         {{ user_context(tenants_amount, users_amount, use_existing_users) }}
       runner:
-        {{ constant_runner(concurrency=min(50, 7*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+        {{ constant_runner(concurrency=min(10, 2*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
       sla:
         {{ no_failures_sla() }}
 
@@ -48,7 +48,7 @@
       context:
         {{ user_context(tenants_amount, users_amount, use_existing_users) }}
       runner:
-        {{ constant_runner(concurrency=min(50, 7*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+        {{ constant_runner(concurrency=min(10, 2*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
       sla:
         {{ no_failures_sla() }}
 
@@ -59,14 +59,14 @@
       context:
         {{ user_context(tenants_amount, users_amount, use_existing_users) }}
       runner:
-        {{ constant_runner(concurrency=min(50, 3*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+        {{ constant_runner(concurrency=min(10, 3*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
       sla:
         {{ no_failures_sla() }}
     -
       context:
         {{ user_context(tenants_amount, users_amount, use_existing_users) }}
       runner:
-        {{ constant_runner(concurrency=min(50, 3*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+        {{ constant_runner(concurrency=min(10, 3*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
       sla:
         {{ no_failures_sla() }}
 
@@ -75,14 +75,14 @@
       context:
         {{ user_context(tenants_amount, users_amount, use_existing_users) }}
       runner:
-        {{ constant_runner(concurrency=min(50, 7*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+        {{ constant_runner(concurrency=min(10, 2*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
       sla:
         {{ no_failures_sla() }}
 
   KeystoneBasic.create_user:
     -
       runner:
-        {{ constant_runner(concurrency=min(50, 7*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+        {{ constant_runner(concurrency=min(10, 2*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
       sla:
         {{ no_failures_sla() }}
 
@@ -91,21 +91,21 @@
       args:
         enabled: true
       runner:
-        {{ constant_runner(concurrency=min(50, 7*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+        {{ constant_runner(concurrency=min(10, 2*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
       sla:
         {{ no_failures_sla() }}
     -
       args:
         enabled: false
       runner:
-        {{ constant_runner(concurrency=min(50, 7*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+        {{ constant_runner(concurrency=min(10, 2*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
       sla:
         {{ no_failures_sla() }}
 
   KeystoneBasic.create_user_update_password:
     -
       runner:
-        {{ constant_runner(concurrency=min(50, 7*controllers_amount),times=min(200, 67*controllers_amount), is_smoke=smoke) }}
+        {{ constant_runner(concurrency=min(10, 2*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
       sla:
         {{ no_failures_sla() }}
 

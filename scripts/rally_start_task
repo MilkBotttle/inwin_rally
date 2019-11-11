@@ -6,9 +6,17 @@ function ctrl_c() {
         exit 1
 }
 
-if [ "x$@" == "x" ];
+function contains() {
+    [[ $1 =~ (^|[[:space:]])$2($|[[:space:]]) ]] && exit(0) || exit(1)
+}
+
+ALL_SERVICES="nova glance neutron keystone cinder heat designate octavia quotas"
+TIMESTAMP=$(date +%F-%H-%M-%S)
+ECHO_STRING=
+
+if [ "$#" -eq 0 ];
 then 
-    echo "Select a service form nova,glance,neutron,keystone,cinder,heat,designate,octavia."
+    echo "Select service form $ALL_SERVICES"
     echo "or all"
     exit 0
 
@@ -16,19 +24,24 @@ else
     services="$@"
 fi 
 
-if [ "$@" == "all" ];
+if [ "$1" == "all" ];
 then
-    services="nova neutron keystone cinder glance heat designate octavia"
+    services=$ALL_SERVICES
 fi
-TIMESTAMP=$(date +%F-%H-%M-%S)
-ECHO_STRING=
+
 mkdir -p output/$TIMESTAMP
 for s in $services
-do
+do  
+    contains $ALL_SERVICES $s 
+    if [ $? -gt 0 ];
+    then 
+        echo "$s not in $ALL_SERVICES"
+        exit 1
+    fi
     JSON_STRING=$( jq -n \
                       --arg service "$s" \
                       '{service_list: [ $service ]}' )
-    rally task start --task /root/openstack/task.yaml --task-args-file /root/openstack/task_arguments.yaml --task-args "$JSON_STRING" --tag "$s$TIMESTAMP"
+    rally task start --task /root/openstack/task.yaml --task-args-file /root/openstack/task_arguments.yaml --task-args "$JSON_STRING" --tag "$s-$TIMESTAMP"
     
     rally task report --html-static --uuid $(rally task list --uuids-only --tag "$s-$TIMESTAMP") --out output/$TIMESTAMP/$s.html
     ECHO_STRING="$ECHO_STRING \n$s report path: output/$TIMESTAMP/$s.html"

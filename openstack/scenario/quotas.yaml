@@ -1,0 +1,50 @@
+  Quotas.nova_update_and_delete:
+    -
+      args:
+        max_quota: -1
+      runner:
+        {{ constant_runner(concurrency=min(10, 2*controllers_amount), times=10*controllers_amount, is_smoke=smoke) }}
+      sla:
+        failure_rate:
+          max: 0
+  Quotas.nova_get:
+    -
+      runner:
+        {{ constant_runner(concurrency=min(10, 2*controllers_amount), times=10*controllers_amount, is_smoke=smoke) }}
+      sla:
+        failure_rate:
+          max: 0
+  Quotas.neutron_update:
+    -
+      args:
+        max_quota: -1
+      runner:
+        {{ constant_runner(concurrency=min(10, 2*controllers_amount), times=10*controllers_amount, is_smoke=smoke) }}
+      sla:
+        failure_rate:
+          max: 0
+  Quotas.cinder_update:
+  -
+    args:
+      max_quota: -1
+    runner:
+        {{ constant_runner(concurrency=min(10, 2*controllers_amount), times=10*controllers_amount, is_smoke=smoke) }}
+    sla:
+      failure_rate:
+        max: 0
+  Quotas.cinder_update_and_delete:
+    -
+      args:
+        max_quota: -1
+      runner:
+        {{ constant_runner(concurrency=min(10, 2*controllers_amount), times=10*controllers_amount, is_smoke=smoke) }}
+      sla:
+        failure_rate:
+          max: 0
+  Quotas.cinder_get:
+    -
+      runner:
+        {{ constant_runner(concurrency=min(10, 2*controllers_amount), times=10*controllers_amount, is_smoke=smoke) }}
+      sla:
+        failure_rate:
+          max: 0

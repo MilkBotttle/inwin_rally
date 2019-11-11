@@ -49,3 +49,7 @@
 {% if "designate" in service_list %}
 {%- include "scenario/designate.yaml"-%}
 {% endif %}
+
+{% if "quotas" in service_list %}
+{%- include "scenario/quotas.yaml"-%}
+{% endif %}

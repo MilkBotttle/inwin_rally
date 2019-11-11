@@ -244,16 +244,6 @@
       sla:
         {{ no_failures_sla() }}
 
-  Quotas.neutron_update:
-    -
-      args:
-        max_quota: 1024
-      context:
-        {{ user_context(tenants_amount, users_amount, use_existing_users) }}
-      runner:
-        {{ constant_runner(concurrency=2*controllers_amount, times=8*controllers_amount, is_smoke=smoke) }}
-      sla:
-        {{ no_failures_sla() }}
   NeutronNetworks.associate_and_dissociate_floating_ips:
     -
       args:
