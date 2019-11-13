@@ -30,6 +30,8 @@ File task_arguments.yaml contains all task options:
 +========================+====================================================+
 | smoke                  | Dry run without load from 1 user                   |
 +------------------------+----------------------------------------------------+
+| service_list           | All support services list, DON'T EDIT IT           |
++------------------------+----------------------------------------------------+
 | use_existing_users     | In case of testing cloud with r/o Keystone e.g. AD |
 +------------------------+----------------------------------------------------+
 | image_name             | Images name that exist in cloud                    |

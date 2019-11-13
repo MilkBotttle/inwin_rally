@@ -1,4 +1,5 @@
 # Rally container docker file, and tasks.
+
 ## Prepare env for test
 
 1. Create a user in openstack for rally test
@@ -54,44 +55,66 @@ openstack:
       password: rally
       tenant_name: rally_test
 ```
-5. Create env
-```
-rally env create --spec env.yaml --name openstack
-```
-6. Check env
-```
-rally env check 
-```
 
 ## Run rally container 
-1. Build image or load from tarball
+1. Clone 
 ```
+https://github.com/MilkBotttle/inwin_rally.git
+```
+2. Build image
+```
+cd inwin_rally
 docker build --network host -t inwin_rally .
 ```
-or
-```
-docker load < inwin_rally.tar
-```
-2. Run container 
+3. Run container 
 ```
 mkdir output
 docker run --network host --name rally \
-    -v $PWD/inwin_rally/openstack:/root/openstack \
-    -v $PWD/output:/root/output \
+    -v $PWD/inwin_rally/openstack:/root/openstack:z \
+    -v $PWD/inwin_rally/scripts/rally_start_task:/usr/bin/rally-start-task:z \
+    -v $PWD/output:/root/output:z \
     -v rally_db:/venv_rally/database \
     -v rally_volume:/root/.rally -d inwin_rally
 ```
+4. Create env and check
+```
+docker cp env.yaml rally:/root/
+# in container
+rally env create --spec env.yaml --name openstack
+rally env check 
+```
 
 ## Update rally 
-* Update new tasks
+* Pull from github
 ```
-docker cp openstack rally:/root
+cd inwin_rally 
+git pull
 ```
-
 ## Run task
-1. Edit task args
-Read [doc](openstack/README.rst)
+1. Edit `openstack/task_arguments`
+```
+# Those arguments need chage for your environment.
+external_network_id 
+external_network_name 
+private_network_id 
+zone_id 
+image_name 
+flavor_name 
+to_flavor_name 
+glance_image_location
+```
+Read More [doc](openstack/README.rst) 
+
 2. Run task in container 
+> Run all tasks
 ```
 rally_start_task all
 ```
+> Run a service task
+```
+rally_start_task [service]
+```
+avaliable service: nova, glance, neutron, keystone, cinder, heat,
+designate, octavia, quotas
+
+

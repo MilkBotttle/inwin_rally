@@ -10,11 +10,7 @@ RUN echo 'source /venv_rally/bin/activate' >> /root/.bashrc
 ENV PATH="/venv_rally/bin:$PATH"
 RUN pip install git+https://github.com/openstack/rally-openstack.git
 RUN pip install 'urllib3==1.24.2' 'pyasn1<0.5.0,>=0.4.6'
-
-
-COPY openstack /root/openstack
 COPY python_patch /root/python_patch
-COPY scripts/* /root/
 RUN patch /venv_rally/lib/python2.7/site-packages/rally_openstack/cleanup/resources.py /root/python_patch/resources.patch
 RUN mkdir -p /root/.rally && rally db recreate && ln -s /root/openstack/plugins /root/.rally/plugins
 
