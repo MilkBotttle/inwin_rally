@@ -270,7 +270,7 @@
       context:
         roles:
           - admin
-        network: {}
+        network: { router: { external: false } }
         networking_agents: {}
         quotas:
           neutron:

@@ -2,7 +2,7 @@
     -
       context:
         {% call user_context(tenants_amount, users_amount, use_existing_users) %}
-        network: {}
+        network: { router: { external: false } }
         roles: ["admin"]
         {% endcall %}
       runner:
@@ -14,7 +14,7 @@
     -
       context:
         {% call user_context(tenants_amount, users_amount, use_existing_users) %}
-        network: {}
+        network: { router: { external: false } }
         roles: ["admin"]
         {% endcall %}
       runner:
@@ -26,7 +26,7 @@
     -
       context:
         {% call user_context(tenants_amount, users_amount, use_existing_users) %}
-        network: {}
+        network: { router: { external: false } }
         roles: ["admin"]
         {% endcall %}
       runner:
@@ -54,7 +54,7 @@
           name: {{ flavor_name }}
       context:
         {% call user_context(tenants_amount, users_amount, use_existing_users) %}
-        network: {}
+        network: { router: { external: false } }
         roles: ["admin"]
         {% endcall %}
       runner:
@@ -71,7 +71,7 @@
           name: {{ flavor_name }}
       context:
         {% call user_context(tenants_amount, users_amount, use_existing_users) %}
-        network: {}
+        network: { router: { external: false } }
         roles: ["admin"]
         {% endcall %}
       runner:
@@ -83,7 +83,7 @@
     -
       context:
         {% call user_context(tenants_amount, users_amount, use_existing_users) %}
-        network: {}
+        network: { router: { external: false } }
         roles: ["admin"]
         {% endcall %}
       runner:
@@ -98,7 +98,7 @@
         protocol: "HTTP"
       context:
         {% call user_context(tenants_amount, users_amount, use_existing_users) %}
-        network: {}
+        network: { router: { external: false } }
         roles: ["admin"]
         {% endcall %}
       runner:
@@ -113,7 +113,7 @@
         protocol: "HTTP"
       context:
         {% call user_context(tenants_amount, users_amount, use_existing_users) %}
-        network: {}
+        network: { router: { external: false } }
         roles: ["admin"]
         {% endcall %}
       runner:
@@ -128,7 +128,7 @@
         protocol: "HTTP"
       context:
         {% call user_context(tenants_amount, users_amount, use_existing_users) %}
-        network: {}
+        network: { router: { external: false } }
         roles: ["admin"]
         {% endcall %}
       runner:
@@ -143,7 +143,7 @@
         protocol: "HTTP"
       context:
         {% call user_context(tenants_amount, users_amount, use_existing_users) %}
-        network: {}
+        network: { router: { external: false } }
         roles: ["admin"]
         {% endcall %}
       runner:
@@ -155,7 +155,7 @@
     -
       context:
         {% call user_context(tenants_amount, users_amount, use_existing_users) %}
-        network: {}
+        network: { router: { external: false } }
         roles: ["admin"]
         {% endcall %}
       runner:
@@ -167,7 +167,7 @@
     -
       context:
         {% call user_context(tenants_amount, users_amount, use_existing_users) %}
-        network: {}
+        network: { router: { external: false } }
         roles: ["admin"]
         {% endcall %}
       runner:
@@ -179,7 +179,7 @@
     -
       context:
         {% call user_context(tenants_amount, users_amount, use_existing_users) %}
-        network: {}
+        network: { router: { external: false } }
         roles: ["admin"]
         {% endcall %}
       runner:
@@ -191,7 +191,7 @@
     -
       context:
         {% call user_context(tenants_amount, users_amount, use_existing_users) %}
-        network: {}
+        network: { router: { external: false } }
         roles: ["admin"]
         {% endcall %}
       runner:
@@ -203,7 +203,7 @@
     -
       context:
         {% call user_context(tenants_amount, users_amount, use_existing_users) %}
-        network: {}
+        network: { router: { external: false } }
         roles: ["admin"]
         {% endcall %}
       runner:
@@ -215,7 +215,7 @@
     -
       context:
         {% call user_context(tenants_amount, users_amount, use_existing_users) %}
-        network: {}
+        network: { router: { external: false } }
         roles: ["admin"]
         {% endcall %}
       runner:
@@ -227,7 +227,7 @@
     -
       context:
         {% call user_context(tenants_amount, users_amount, use_existing_users) %}
-        network: {}
+        network: { router: { external: false } }
         roles: ["admin"]
         {% endcall %}
       runner:
@@ -239,7 +239,7 @@
     -
       context:
         {% call user_context(tenants_amount, users_amount, use_existing_users) %}
-        network: {}
+        network: { router: { external: false } }
         roles: ["admin"]
         {% endcall %}
       runner:
@@ -251,7 +251,7 @@
     -
       context:
         {% call user_context(tenants_amount, users_amount, use_existing_users) %}
-        network: {}
+        network: { router: { external: false } }
         roles: ["admin"]
         {% endcall %}
       runner:

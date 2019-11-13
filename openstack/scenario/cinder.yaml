@@ -18,7 +18,7 @@
         quotas:
           {{ unlimited_volumes() }}
         {% endcall %}
-        network: {}
+        network: { router: { external: false } }
       runner:
         {{ constant_runner(concurrency=min(10, 2*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
       sla:
@@ -186,7 +186,7 @@
         quotas:
           {{ unlimited_volumes() }}
         {% endcall %}
-        network: {}
+        network: { router: False }
       runner:
         {{ constant_runner(concurrency=min(10, 2*controllers_amount),times=min(30, 10*controllers_amount), is_smoke=smoke) }}
       sla:
