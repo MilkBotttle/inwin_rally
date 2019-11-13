@@ -29,12 +29,12 @@ else
     services="$@"
 fi 
 
-mkdir -p output/$TIMESTAMP
+mkdir -p /root/output/$TIMESTAMP
 
 if [ "$1" == "all" ];
 then
     rally task start --task /root/openstack/task.yaml --task-args-file /root/openstack/task_arguments.yaml --tag "all-$TIMESTAMP"
-    rally task report --html-static --uuid $(rally task list --uuids-only --tag "all-$TIMESTAMP") --out output/$TIMESTAMP/all.html
+    rally task report --html-static --uuid $(rally task list --uuids-only --tag "all-$TIMESTAMP") --out /root/output/$TIMESTAMP/all.html
     exit 0
 fi
 
@@ -52,8 +52,8 @@ do
                       '{service_list: [ $service ]}' )
     rally task start --task /root/openstack/task.yaml --task-args-file /root/openstack/task_arguments.yaml --task-args "$JSON_STRING" --tag "$s-$TIMESTAMP"
     
-    rally task report --html-static --uuid $(rally task list --uuids-only --tag "$s-$TIMESTAMP") --out output/$TIMESTAMP/$s.html
-    ECHO_STRING="$ECHO_STRING \n$s report path: output/$TIMESTAMP/$s.html"
+    rally task report --html-static --uuid $(rally task list --uuids-only --tag "$s-$TIMESTAMP") --out /root/output/$TIMESTAMP/$s.html
+    ECHO_STRING="$ECHO_STRING \n$s report path: /root/output/$TIMESTAMP/$s.html"
 done
 
 echo

@@ -71,7 +71,7 @@ docker build --network host -t inwin_rally .
 mkdir output
 docker run --network host --name rally \
     -v $PWD/inwin_rally/openstack:/root/openstack:z \
-    -v $PWD/inwin_rally/scripts/rally_start_task:/usr/bin/rally-start-task:z \
+    -v $PWD/inwin_rally/scripts/rally-start-task:/usr/bin/rally-start-task:z \
     -v $PWD/output:/root/output:z \
     -v rally_db:/venv_rally/database \
     -v rally_volume:/root/.rally -d inwin_rally
