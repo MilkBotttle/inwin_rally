@@ -72,10 +72,14 @@ or
 ```
 docker load < inwin_rally.tar
 ```
-2. Run 
+2. Run container 
 ```
 mkdir output
-docker run --network host --name rally -v $PWD/output:/root/output -v rally_db:/venv_rally/database -v rally_volume:/root/.rally -d inwin_rally
+docker run --network host --name rally \
+    -v $PWD/inwin_rally/openstack:/root/openstack \
+    -v $PWD/output:/root/output \
+    -v rally_db:/venv_rally/database \
+    -v rally_volume:/root/.rally -d inwin_rally
 ```
 
 ## Update rally 
